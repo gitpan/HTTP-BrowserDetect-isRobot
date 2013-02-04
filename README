@@ -2,7 +2,7 @@ NAME
     HTTP::BrowserDetect::isRobot - test if the user-agent is a robot or not
 
 VERSION
-    version 0.01
+    version 0.02
 
 SYNOPSIS
         use HTTP::BrowserDetect::isRobot 'is_robot';
@@ -12,7 +12,7 @@ SYNOPSIS
         }
 
 DESCRIPTION
-    extends HTTP::BrowserDetect with more robots detecting.
+    extends HTTP::BrowserDetect with more robot detection.
 
     inspired by Plack::Middleware::BotDetector
 
@@ -22,7 +22,28 @@ METHODS
 
     the regexp is quite incomplete. patches welcome.
 
-    1;
+  is_site_robot
+    take User-Agent as the only argument. return 1 if yes.
+
+    check if it's from any website like Google or Bing.
+
+        use HTTP::BrowserDetect::isRobot 'is_site_robot';
+
+        if ( is_site_robot('Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)') ) {
+            print "Yes\n";
+        }
+
+  is_program_robot
+    take User-Agent as the only argument. return 1 if yes.
+
+    check if it's from any library of programming languages, like LWP or
+    WWW::Mechanize or others.
+
+        use HTTP::BrowserDetect::isRobot 'is_program_robot';
+
+        if ( is_program_robot('Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)') ) {
+            print "Yes\n";
+        }
 
 AUTHOR
     Fayland Lam <fayland@gmail.com>

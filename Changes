@@ -1,4 +1,9 @@
 Revision history for Perl extension HTTP-BrowserDetect-isRobot
 
+0.02    2013.02.04
+        doc improvements by Michael Stevens (mstevens)
+        regexp updates
+        add sub is_program_robot/is_site_robot
+
 0.01    2013.02.04
         a start

@@ -14,4 +14,4 @@ meta-spec:
 name: HTTP-BrowserDetect-isRobot
 resources:
   repository: git://github.com/fayland/p5-HTTP-BrowserDetect-isRobot.git
-version: 0.01
+version: 0.02

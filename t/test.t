@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-use HTTP::BrowserDetect::isRobot 'is_robot';
+use HTTP::BrowserDetect::isRobot qw/is_robot is_site_robot is_program_robot/;
 use Test::More;
 
 my @robots = (
@@ -11,7 +11,19 @@ my @robots = (
 );
 
 foreach my $a (@robots) {
-    ok( is_robot($a), $a );
+    ok( is_robot($a),      $a );
+    ok( is_site_robot($a), $a );
+}
+
+my @program_robots = (
+    'Python-urllib/2.6', 'libwww-perl/5.833',
+    'Java/1.6.0_26',     "Apache-HttpClient/4.1 (java 1.5)",
+    "python-requests/0.12.1",
+);
+
+foreach my $a (@program_robots) {
+    ok( is_robot($a),         $a );
+    ok( is_program_robot($a), $a );
 }
 
 my @browsers = (

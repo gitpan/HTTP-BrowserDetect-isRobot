@@ -1,6 +1,6 @@
 package HTTP::BrowserDetect::isRobot;
 {
-    $HTTP::BrowserDetect::isRobot::VERSION = '0.01';
+    $HTTP::BrowserDetect::isRobot::VERSION = '0.02';
 }
 
 # ABSTRACT: test if the user-agent is a robot or not
@@ -10,17 +10,41 @@ use warnings;
 use base 'Exporter';
 use vars qw/@EXPORT_OK/;
 
-@EXPORT_OK = qw/is_robot/;
+@EXPORT_OK = qw/is_robot is_site_robot is_program_robot/;
 
 sub is_robot {
     my ($agent) = @_;
 
-    return 1
-      if $agent =~
-/Googlebot|Baiduspider|Yahoo! Slurp|Bingbot|MSNbot|altavista|lycos|infoseek|webcrawler|lecodechecker|Ask Jeeves|facebookexternalhit|adsbot-google|ia_archive|FatBot|Xenu Link Sleuth|BlitzBOT|btbot|CatchBot|Charlotte|Discobot|FAST-WebCrawler|FurlBot|Gaisbot|iaskspider|Mediapartners-Google|PycURL|Seekbot|SEOChat|SeznamBot|silk|Sitebot|sogou spider|Sosospider|TweetedTimes|YahooSeeker|YandexBot|Yeti|YodaoBot|YoudaoBot|ZyBorg|Twitterbot/i;
+    return 1 if is_site_robot($agent);
+    return 1 if is_program_robot($agent);
 
     return;
 }
+
+sub is_site_robot {
+    my ($agent) = @_;
+
+    return 1
+      if $agent =~
+/Googlebot|Baiduspider|Yahoo! Slurp|Bingbot|MSNbot|altavista|lycos|infoseek|webcrawler|lecodechecker|Ask Jeeves|facebookexternalhit|adsbot-google|ia_archive|FatBot|Xenu Link Sleuth|BlitzBOT|btbot|CatchBot|Charlotte|Discobot|FAST-WebCrawler|FurlBot|Gaisbot|iaskspider|Mediapartners-Google|Seekbot|SEOChat|SeznamBot|silk|Sitebot|sogou spider|Sosospider|TweetedTimes|YahooSeeker|YandexBot|Yeti|YodaoBot|YoudaoBot|ZyBorg|Twitterbot|AhrefsBot|TweetedTimes Bot|TweetmemeBot|bitlybot|ShowyouBot|UnwindFetchor|MetaURI API|PaperLiBot|LinkedInBot|AddThis\.com robot|FriendFeedBot/i;
+
+    return;
+}
+
+sub is_program_robot {
+    my ($agent) = @_;
+
+    return 1
+      if $agent =~
+      /libwww-perl|PycURL|EventMachine HttpClient|Apache-HttpClient/;
+    return 1 if $agent =~ m{Python-(\w+)/}i;
+    return 1 if $agent =~ m{Java/};
+    return 1 if $agent eq 'Ruby';
+
+    return;
+}
+
+1;
 
 __END__
 
@@ -32,7 +56,7 @@ HTTP::BrowserDetect::isRobot - test if the user-agent is a robot or not
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -44,7 +68,7 @@ version 0.01
 
 =head1 DESCRIPTION
 
-extends L<HTTP::BrowserDetect> with more robots detecting.
+extends L<HTTP::BrowserDetect> with more robot detection.
 
 inspired by L<Plack::Middleware::BotDetector>
 
@@ -56,7 +80,29 @@ take User-Agent as the only argument. return 1 if yes.
 
 the regexp is quite incomplete. patches welcome.
 
-1;
+=head2 is_site_robot
+
+take User-Agent as the only argument. return 1 if yes.
+
+check if it's from any website like Google or Bing.
+
+    use HTTP::BrowserDetect::isRobot 'is_site_robot';
+
+    if ( is_site_robot('Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)') ) {
+        print "Yes\n";
+    }
+
+=head2 is_program_robot
+
+take User-Agent as the only argument. return 1 if yes.
+
+check if it's from any library of programming languages, like LWP or WWW::Mechanize or others.
+
+    use HTTP::BrowserDetect::isRobot 'is_program_robot';
+
+    if ( is_program_robot('Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)') ) {
+        print "Yes\n";
+    }
 
 =head1 AUTHOR
 
