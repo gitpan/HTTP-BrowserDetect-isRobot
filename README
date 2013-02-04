@@ -1,0 +1,35 @@
+NAME
+    HTTP::BrowserDetect::isRobot - test if the user-agent is a robot or not
+
+VERSION
+    version 0.01
+
+SYNOPSIS
+        use HTTP::BrowserDetect::isRobot 'is_robot';
+
+        if ( is_robot('Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)') ) {
+            print "Yes\n";
+        }
+
+DESCRIPTION
+    extends HTTP::BrowserDetect with more robots detecting.
+
+    inspired by Plack::Middleware::BotDetector
+
+METHODS
+  is_robot
+    take User-Agent as the only argument. return 1 if yes.
+
+    the regexp is quite incomplete. patches welcome.
+
+    1;
+
+AUTHOR
+    Fayland Lam <fayland@gmail.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2013 by Fayland Lam.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
