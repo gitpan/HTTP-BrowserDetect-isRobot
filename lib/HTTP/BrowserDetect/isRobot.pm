@@ -1,6 +1,6 @@
 package HTTP::BrowserDetect::isRobot;
 {
-    $HTTP::BrowserDetect::isRobot::VERSION = '0.02';
+    $HTTP::BrowserDetect::isRobot::VERSION = '0.03';
 }
 
 # ABSTRACT: test if the user-agent is a robot or not
@@ -56,7 +56,7 @@ HTTP::BrowserDetect::isRobot - test if the user-agent is a robot or not
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -77,6 +77,8 @@ inspired by L<Plack::Middleware::BotDetector>
 =head2 is_robot
 
 take User-Agent as the only argument. return 1 if yes.
+
+== is_site_robot || is_program_robot
 
 the regexp is quite incomplete. patches welcome.
 
@@ -100,7 +102,7 @@ check if it's from any library of programming languages, like LWP or WWW::Mechan
 
     use HTTP::BrowserDetect::isRobot 'is_program_robot';
 
-    if ( is_program_robot('Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)') ) {
+    if ( is_program_robot('libwww-perl/5.833') ) {
         print "Yes\n";
     }
 
