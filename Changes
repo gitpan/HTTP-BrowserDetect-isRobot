@@ -1,5 +1,8 @@
 Revision history for Perl extension HTTP-BrowserDetect-isRobot
 
+0.04    2013.04.09
+        fixes for ^silk (John Simpson)
+
 0.03    2013.02.04
         POD fix
 
