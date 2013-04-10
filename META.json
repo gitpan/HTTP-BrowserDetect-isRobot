@@ -35,7 +35,7 @@
          "web" : "https://github.com/fayland/p5-HTTP-BrowserDetect-isRobot"
       }
    },
-   "version" : "0.04",
+   "version" : "0.05",
    "x_contributors" : [
       "Michael Stevens <mstevens@etla.org>"
    ]

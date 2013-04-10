@@ -2,7 +2,7 @@ NAME
     HTTP::BrowserDetect::isRobot - test if the user-agent is a robot or not
 
 VERSION
-    version 0.04
+    version 0.05
 
 SYNOPSIS
         use HTTP::BrowserDetect::isRobot 'is_robot';

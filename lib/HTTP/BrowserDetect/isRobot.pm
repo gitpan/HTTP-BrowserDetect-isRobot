@@ -1,6 +1,6 @@
 package HTTP::BrowserDetect::isRobot;
 {
-    $HTTP::BrowserDetect::isRobot::VERSION = '0.04';
+    $HTTP::BrowserDetect::isRobot::VERSION = '0.05';
 }
 
 # ABSTRACT: test if the user-agent is a robot or not
@@ -39,7 +39,7 @@ sub is_program_robot {
       if $agent =~
       /libwww-perl|PycURL|EventMachine HttpClient|Apache-HttpClient/;
     return 1 if $agent =~ m{Python-(\w+)/}i;
-    return 1 if $agent =~ m{Java/};
+    return 1 if $agent =~ m{^Java/};
     return 1 if $agent eq 'Ruby';
 
     return;
@@ -57,7 +57,7 @@ HTTP::BrowserDetect::isRobot - test if the user-agent is a robot or not
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
